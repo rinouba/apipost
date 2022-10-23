@@ -1,10 +1,9 @@
-import React from 'react'
+import React from "react";
 
-function Detailss({Detailsz,id,body}) {
-  return (<>
-    {Detailsz===id?<h5 className='text-white'>Body : {body}</h5>:''}
-    </>
-    )
+function Detailss({ details, id, body }) {
+  return (
+    <>{details === id ? <h5 className="text-white">Body : {body}</h5> : ""}</>
+  );
 }
 
-export default Detailss
+export default Detailss;
