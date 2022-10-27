@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import "./posts.css";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function Posts({ data, details, setDetails, setId, setBody }) {
+function Posts({ data, details, setDetails, setBody, setId, id }) {
+  const navigate = useNavigate();
+
   const [i, seti] = useState(1);
   const filterz = data.filter((els) => els.userId === i);
-  const [edit, setedit] = useState(null);
 
   if (i === 11) {
     seti(1);
@@ -13,44 +14,45 @@ function Posts({ data, details, setDetails, setId, setBody }) {
   if (i <= 0) {
     seti(10);
   }
-
   return (
     <>
       {filterz.map(({ id, title, body }, idx) => {
         return (
           <div
-            className="border p-3 col-md-4 m-3 col-lg-3 text-left position-relative"
+            className="p-3 col-md-4 m-3 col-lg-3 text-left position-relative card-post"
             key={id}
           >
-            <div className="text-white">Number Post : {id}</div>
-            <h2 className="text-white">
-              Title : <span className="text-danger">{title}</span>
+            <div className="text-white text-center mt-3 fs-3">
+              Post Number : {id}
+            </div>
+            <h2 className="text-white mt-4">
+              Title : <span className="text-title">{title}</span>
             </h2>
 
             <div
               className="text-info initialism Details"
               onClick={() => {
                 details === id ? setDetails(null) : setDetails(id);
-                setId(id);
                 setBody(body);
+                setId(id);
               }}
             >
-              <NavLink to={"/details"}>
-                <u>More Details</u>
-              </NavLink>
+              <div className="text-center">
+                <u onClick={() => navigate(`/details/${id}`)}>More Details</u>
+              </div>
             </div>
-            <button
+            {/* <button
               className="btn btn-danger btn-x"
               onClick={() => (edit === id ? setedit(null) : setedit(id))}
             >
               Edit
             </button>
-            {edit === id ? <input type="text" /> : ""}
+            {edit === id ? <input type="text" /> : ""} */}
           </div>
         );
       })}
 
-      <div className="text-center">
+      <div className="text-center mt-5">
         <button
           className="btn btn-danger me-5 mb-5"
           onClick={() => seti(i - 1)}

@@ -3,14 +3,17 @@ import React, { useEffect, useState } from "react";
 import Posts from "./ِCommponts/Posts/Posts";
 import Details from "./ِCommponts/Details/Details";
 import apiUrl from "./Config/Config";
+import { Notfound } from "./Config/NotFound";
 
-import { BrowserRouter, Route, Routes, NavLink } from "react-router-dom";
+import { Route, Routes, NavLink, useParams } from "react-router-dom";
 
 function App() {
   const [data, setData] = useState();
   const [body, setBody] = useState();
   const [details, setDetails] = useState(null);
   const [id, setId] = useState();
+
+  const { getId } = useParams();
 
   useEffect(() => {
     fetch(apiUrl)
@@ -21,14 +24,16 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter>
-      <div className="container">
-        <NavLink to={"/"}>
+    <>
+      <NavLink to={"/"}>
+        <nav className="bg-nav pb-3">
           <div className="text-center">
-            <button className="btn btn-info">Home</button>
+            <button className="btn btn-info mt-3 ">Home</button>
           </div>
-        </NavLink>
+        </nav>
+      </NavLink>
 
+      <div className="container container-big">
         <div id="Menu" className="row d-flex justify-content-evenly">
           <Routes>
             <Route
@@ -41,19 +46,22 @@ function App() {
                     setBody={setBody}
                     Detailsz={details}
                     setDetails={setDetails}
+                    id={id}
+                    getId={getId}
                     setId={setId}
                   />
                 )
               }
             />
             <Route
-              path="/details"
+              path={`/details/:getId`}
               element={<Details body={body} id={id} details={details} />}
             />
+            <Route path={"*"} element={<Notfound />} />
           </Routes>
         </div>
       </div>
-    </BrowserRouter>
+    </>
   );
 }
 

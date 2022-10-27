@@ -1,0 +1,9 @@
+.background-body{
+    background-color: #B1B2FF;
+}
+.container-big{
+    background-color: var(--color4);
+}
+.bg-nav{
+    background-color: var(--color3);
+}

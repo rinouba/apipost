@@ -1,3 +1,9 @@
+:root{
+--color1:#B1B2FF;
+--color2:#AAC4FF;
+--color3:#D2DAFF;
+--color4: #EEF1FF;
+}
 .btn-x{
     position: absolute;
     top: 0;
@@ -5,4 +11,16 @@
 }
 .Details{
     cursor: pointer;
+}
+
+.card-post{
+border-left: 5px solid var(--color2);
+border-bottom: 5px solid var(--color2);
+padding-left: 10px;
+background-color: var(--color3);
+box-shadow: 5px 20px 20px var(--color3);
+}
+
+.text-title{
+    color: var(--color2);
 }
